@@ -55,7 +55,7 @@ main/
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/jurri/jurri.github.io/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/jurri/jurri.github.io/issues/new).
+Have a bug or a feature request? Please first read the [issue guidelines](CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](issues/new).
 
 
 ## Documentation
@@ -79,11 +79,11 @@ Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com
 
 ## Contributing
 
-Please read through our [contributing guidelines](https://github.com/jurri/jurri.github.io/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+Please read through our [contributing guidelines](CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
 Moreover, if your pull request contains JavaScript patches or features, you must include relevant unit tests. All HTML and CSS should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [Mark Otto](https://github.com/mdo).
 
-Editor preferences are available in the [editor config](https://github.com/jurri/jurri.github.io/.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
+Editor preferences are available in the [editor config](.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
 
 
@@ -115,4 +115,4 @@ For transparency into our release cycle and in striving to maintain backward com
 
 ## Copyright and license
 
-Code and documentation copyright 2011-2015 Twitter, Inc. Code released under [the MIT license](https://github.com/twbs/bootstrap/blob/master/LICENSE).
+Code and documentation copyright 2011-2015 Twitter, Inc. Code released under [the MIT license](LICENSE).
