@@ -1,6 +1,6 @@
 # Contributing to jurri Alias JayDee aka FeTTsack
 
-Looking to contribute something to Bootstrap? **Here's how you can help.**
+Looking to contribute something to [JayDee]? **Here's how you can help.**
 
 Please take a moment to review this document in order to make the contribution
 process easy and effective for everyone involved.
@@ -13,13 +13,13 @@ patches and features.
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/twbs/bootstrap/issues) is
+The [issue tracker](https://github.com/twbs/[JayDee]/issues) is
 the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests)
 and [submitting pull requests](#pull-requests), but please respect the following
 restrictions:
 
 * Please **do not** use the issue tracker for personal support requests.  Stack
-  Overflow ([`twitter-bootstrap-3`](http://stackoverflow.com/questions/tagged/twitter-bootstrap-3) tag) or [IRC](README.md#community) are better places to get help.
+  Overflow ([`twitter-[JayDee]-3`](http://stackoverflow.com/questions/tagged/twitter-[JayDee]-3) tag) or [IRC](README.md#community) are better places to get help.
 
 * Please **do not** derail or troll issues. Keep the discussion on topic and
   respect the opinions of others.
@@ -34,7 +34,7 @@ restrictions:
 Our bug tracker utilizes several labels to help organize and identify issues. Here's what they represent and how we use them:
 
 - `browser bug` - Issues that are reported to us, but actually are the result of a browser-specific bug. These are diagnosed with reduced test cases and result in a issue opened on that browser's own bug tracker.
-- `confirmed` - Issues that have been confirmed with a reduced test case and identify a bug in Bootstrap.
+- `confirmed` - Issues that have been confirmed with a reduced test case and identify a bug in [JayDee].
 - `css` - Issues stemming from our compiled CSS or source Less files.
 - `customizer` - Issues with our web-based Customizer.
 - `docs` - Issues for improving or updating our documentation.
@@ -45,7 +45,7 @@ Our bug tracker utilizes several labels to help organize and identify issues. He
 - `js` - Issues stemming from our compiled or source JavaScript files.
 - `meta` - Issues with the project itself or our GitHub repository.
 
-For a complete look at our labels, see the [project labels page](https://github.com/twbs/bootstrap/labels).
+For a complete look at our labels, see the [project labels page](https://github.com/twbs/[JayDee]/labels).
 
 
 ## Bug reports
@@ -97,8 +97,8 @@ Example:
 
 ### Reporting upstream browser bugs
 
-Sometimes bugs reported to us are actually caused by bugs in the browser(s) themselves, not bugs in Bootstrap per se.
-When feasible, we aim to report such upstream bugs to the relevant browser vendor(s), and then list them on our [Wall of Browser Bugs](http://getbootstrap.com/browser-bugs/) and [document them in MDN](https://developer.mozilla.org/en-US/docs/Web).
+Sometimes bugs reported to us are actually caused by bugs in the browser(s) themselves, not bugs in [JayDee] per se.
+When feasible, we aim to report such upstream bugs to the relevant browser vendor(s), and then list them on our [Wall of Browser Bugs](http://get[JayDee].com/browser-bugs/) and [document them in MDN](https://developer.mozilla.org/en-US/docs/Web).
 
 | Vendor(s)     | Browser(s)                   | Rendering engine | Bug reporting website(s)                                                              | Notes                                                    |
 | ------------- | ---------------------------- | ---------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------- |
@@ -109,7 +109,7 @@ When feasible, we aim to report such upstream bugs to the relevant browser vendo
 
 ### Issues bots
 
-[@twbs-lmvtfy](https://github.com/twbs-lmvtfy) is a Bootstrap bot that hangs out in our GitHub issue tracker and automatically checks for HTML validation errors in live examples (e.g. jsFiddles, JS Bins, Bootplys, Plunks, CodePens, etc.) posted in issue comments. If it finds any errors, it will post a follow-up comment on the issue and point out the errors. If this happens with an example you've posted, please fix the errors and post an updated live example. If you opened a bug report, please check whether the bug still occurs with your revised, valid live example. If the bug no longer occurs, it was probably due to your invalid HTML rather than something in Bootstrap and we'd appreciate it if you could close out the GitHub issue.
+[@twbs-lmvtfy](https://github.com/twbs-lmvtfy) is a [JayDee] bot that hangs out in our GitHub issue tracker and automatically checks for HTML validation errors in live examples (e.g. jsFiddles, JS Bins, Bootplys, Plunks, CodePens, etc.) posted in issue comments. If it finds any errors, it will post a follow-up comment on the issue and point out the errors. If this happens with an example you've posted, please fix the errors and post an updated live example. If you opened a bug report, please check whether the bug still occurs with your revised, valid live example. If the bug no longer occurs, it was probably due to your invalid HTML rather than something in [JayDee] and we'd appreciate it if you could close out the GitHub issue.
 
 
 ## Feature requests
@@ -135,16 +135,16 @@ Please adhere to the [coding guidelines](#code-guidelines) used throughout the
 project (indentation, accurate comments, etc.) and any other requirements
 (such as test coverage).
 
-**Do not edit `bootstrap.css`, `bootstrap-theme.css`, or `bootstrap.js`
+**Do not edit `[JayDee].css`, `[JayDee]-theme.css`, or `[JayDee].js`
 directly!** Those files are automatically generated. You should edit the
-source files in [`/bootstrap/less/`](https://github.com/twbs/bootstrap/tree/master/less)
-and/or [`/bootstrap/js/`](https://github.com/twbs/bootstrap/tree/master/js) instead.
+source files in [`/[JayDee]/less/`](https://github.com/twbs/[JayDee]/tree/master/less)
+and/or [`/[JayDee]/js/`](https://github.com/twbs/[JayDee]/tree/master/js) instead.
 
-Similarly, when contributing to Bootstrap's documentation, you should edit the
+Similarly, when contributing to [JayDee]'s documentation, you should edit the
 documentation source files in
-[the `/bootstrap/docs/` directory of the `master` branch](https://github.com/twbs/bootstrap/tree/master/docs).
+[the `/[JayDee]/docs/` directory of the `master` branch](https://github.com/twbs/[JayDee]/tree/master/docs).
 **Do not edit the `gh-pages` branch.** That branch is generated from the
-documentation source files and is managed separately by the Bootstrap Core Team.
+documentation source files and is managed separately by the [JayDee] Core Team.
 
 Adhering to the following process is the best way to get your work
 included in the project:
@@ -154,11 +154,11 @@ included in the project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/bootstrap.git
+   git clone https://github.com/<your-username>/[JayDee].git
    # Navigate to the newly cloned directory
-   cd bootstrap
+   cd [JayDee]
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/twbs/bootstrap.git
+   git remote add upstream https://github.com/twbs/[JayDee].git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -204,12 +204,12 @@ includes code changes) and under the terms of the
 
 ### Pull request bots
 
-[@twbs-rorschach](https://github.com/twbs-rorschach) is a Bootstrap bot that hangs out in our GitHub issue tracker and automatically checks all pull requests for a few simple common mistakes. It's possible that Rorschach might leave a comment on your pull request and then close it. If that happens, simply fix the problem(s) mentioned in the comment (there should be link(s) in the comment explaining the problem(s) in detail) and then either:
+[@twbs-rorschach](https://github.com/twbs-rorschach) is a [JayDee] bot that hangs out in our GitHub issue tracker and automatically checks all pull requests for a few simple common mistakes. It's possible that Rorschach might leave a comment on your pull request and then close it. If that happens, simply fix the problem(s) mentioned in the comment (there should be link(s) in the comment explaining the problem(s) in detail) and then either:
 
-* Push the revised version to your pull request's branch and post a comment on the pull request saying that you've fixed the problem(s). One of the Bootstrap Core Team members will then come along and reopen your pull request.
+* Push the revised version to your pull request's branch and post a comment on the pull request saying that you've fixed the problem(s). One of the [JayDee] Core Team members will then come along and reopen your pull request.
 * Or you can just open a new pull request for your revised version.
 
-[@twbs-savage](https://github.com/twbs-savage) is a Bootstrap bot that automatically runs cross-browser tests (via [Sauce](https://saucelabs.com) and Travis CI) on JavaScript pull requests. Savage will leave a comment on pull requests stating whether cross-browser JS tests passed or failed, with a link to the full Travis build details. If your pull request fails, check the Travis log to see which browser + OS combinations failed. Each browser test in the Travis log includes a link to a Sauce page with details about the test. On those details pages, you can watch a screencast of the test run to see exactly which unit tests failed.
+[@twbs-savage](https://github.com/twbs-savage) is a [JayDee] bot that automatically runs cross-browser tests (via [Sauce](https://saucelabs.com) and Travis CI) on JavaScript pull requests. Savage will leave a comment on pull requests stating whether cross-browser JS tests passed or failed, with a link to the full Travis build details. If your pull request fails, check the Travis log to see which browser + OS combinations failed. Each browser test in the Travis log includes a link to a Sauce page with details about the test. On those details pages, you can watch a screencast of the test run to see exactly which unit tests failed.
 
 
 ## Code guidelines
@@ -246,4 +246,4 @@ Run `grunt test` before committing to ensure your changes follow our coding stan
 By contributing your code, you agree to license your contribution under the [MIT License](LICENSE).
 By contributing to the documentation, you agree to license your contribution under the [Creative Commons Attribution 3.0 Unported License](docs/LICENSE).
 
-Prior to v3.1.0, Bootstrap's code was released under the Apache License v2.0.
+Prior to v3.1.0, [JayDee]'s code was released under the Apache License v2.0.

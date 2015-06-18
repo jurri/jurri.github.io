@@ -1,14 +1,14 @@
 # [jurri / JayDee](http://jurri.github.io)
 
-![Bower version](https://img.shields.io/bower/v/bootstrap.svg?style=flat)
-[![npm version](https://img.shields.io/npm/v/bootstrap.svg?style=flat)](https://www.npmjs.com/package/bootstrap)
-[![Build Status](https://img.shields.io/travis/twbs/bootstrap/master.svg?style=flat)](https://travis-ci.org/twbs/bootstrap)
-[![devDependency Status](https://img.shields.io/david/dev/twbs/bootstrap.svg?style=flat)](https://david-dm.org/twbs/bootstrap#info=devDependencies)
-[![Selenium Test Status](https://saucelabs.com/browser-matrix/bootstrap.svg)](https://saucelabs.com/u/bootstrap)
+![Bower version](https://img.shields.io/bower/v/[JayDee].svg?style=flat)
+[![npm version](https://img.shields.io/npm/v/[JayDee].svg?style=flat)](https://www.npmjs.com/package/[JayDee])
+[![Build Status](https://img.shields.io/travis/twbs/[JayDee]/master.svg?style=flat)](https://travis-ci.org/twbs/[JayDee])
+[![devDependency Status](https://img.shields.io/david/dev/twbs/[JayDee].svg?style=flat)](https://david-dm.org/twbs/[JayDee]#info=devDependencies)
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/[JayDee].svg)](https://saucelabs.com/u/[JayDee])
 
-Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thornton](https://twitter.com/fat), and maintained by the [core team](https://github.com/orgs/twbs/people) with the massive support and involvement of the community.
+[JayDee] is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thornton](https://twitter.com/fat), and maintained by the [core team](https://github.com/orgs/twbs/people) with the massive support and involvement of the community.
 
-To get started, check out <http://getbootstrap.com>!
+To get started, check out <http://get[JayDee].com>!
 
 ## Table of contents
 
@@ -30,7 +30,7 @@ Four quick start options are available:
 - Install with [Bower](http://bower.io): `bower install`.
 - Install with [npm](https://www.npmjs.org): `npm install`.
 
-Read the [Getting started page](http://getbootstrap.com/getting-started/) for information on the framework contents, templates and examples, and more.
+Read the [Getting started page](http://get[JayDee].com/getting-started/) for information on the framework contents, templates and examples, and more.
 
 ### What's included
 
@@ -60,14 +60,14 @@ Have a bug or a feature request? Please first read the [issue guidelines](CONTRI
 
 ## Documentation
 
-Bootstrap's documentation, included in this repo in the root directory, is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at <http://getbootstrap.com>. The docs may also be run locally.
+[JayDee]'s documentation, included in this repo in the root directory, is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at <http://get[JayDee].com>. The docs may also be run locally.
 
 ### Running documentation locally
 
 1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v2.5.x).
   - **Windows users:** Read [this unofficial guide](http://jekyll-windows.juthilo.com/) to get Jekyll up and running without problems.
 2. Install the Ruby-based syntax highlighter, [Rouge](https://github.com/jneen/rouge), with `gem install rouge`.
-3. From the root `/bootstrap` directory, run `jekyll serve` in the command line.
+3. From the root `/[JayDee]` directory, run `jekyll serve` in the command line.
 4. Open <http://localhost:9001> in your browser, and voilà.
 
 Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com/docs/home/).
@@ -91,10 +91,10 @@ Editor preferences are available in the [editor config](.editorconfig) for easy 
 
 Keep track of development and community news.
 
-- Follow [@twbootstrap on Twitter](https://twitter.com/twbootstrap).
-- Read and subscribe to [The Official Bootstrap Blog](http://blog.getbootstrap.com).
-- Chat with fellow Bootstrappers in IRC. On the `irc.freenode.net` server, in the `##bootstrap` channel.
-- Implementation help may be found at Stack Overflow (tagged [`twitter-bootstrap-3`](http://stackoverflow.com/questions/tagged/twitter-bootstrap-3)).
+- Follow [@tw[JayDee] on Twitter](https://twitter.com/tw[JayDee]).
+- Read and subscribe to [The Official [JayDee] Blog](http://blog.get[JayDee].com).
+- Chat with fellow [JayDee]pers in IRC. On the `irc.freenode.net` server, in the `##[JayDee]` channel.
+- Implementation help may be found at Stack Overflow (tagged [`twitter-[JayDee]-3`](http://stackoverflow.com/questions/tagged/twitter-[JayDee]-3)).
 
 
 
