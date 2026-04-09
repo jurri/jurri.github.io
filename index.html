@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jay Dee – Full-Stack Developer & Systems Architect</title>
+    <meta name="description" content="Full-Stack Developer, Administrator & Database Specialist based in Germany.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ──────────── CSS VARIABLES ──────────── */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #16161f;
+            --bg-card-hover: #1c1c28;
+            --border: #1e1e2e;
+            --border-glow: #2d5cff22;
+            --text-primary: #e4e4ef;
+            --text-secondary: #8888a4;
+            --text-muted: #55556a;
+            --accent: #2d5cff;
+            --accent-dim: #2d5cff33;
+            --accent-bright: #5b8aff;
+            --green: #00e59b;
+            --green-dim: #00e59b22;
+            --cyan: #00d4ff;
+            --magenta: #ff3d8e;
+            --yellow: #ffd23d;
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* ──────────── RESET & BASE ──────────── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-dim) var(--bg-primary);
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* ──────────── NOISE OVERLAY ──────────── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ──────────── GRID BACKGROUND ──────────── */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-dim), transparent);
+        }
+
+        /* ──────────── LANG TOGGLE ──────────── */
+        .lang-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            display: flex;
+            gap: 2px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 3px;
+            backdrop-filter: blur(12px);
+        }
+
+        .lang-btn {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.35rem 0.75rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-muted);
+            transition: all 0.25s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--text-primary);
+        }
+
+        /* ──────────── LAYOUT ──────────── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* ──────────── HERO ──────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content { width: 100%; }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--green);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 0.2s;
+        }
+
+        .hero-label .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--green);
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 0.4s;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent-bright), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 0.6s;
+        }
+
+        .hero-cta {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 0.8s;
+        }
+
+        .btn {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-dim);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-bright);
+            box-shadow: 0 0 30px var(--accent-dim);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 1.2s;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        /* ──────────── SECTION HEADERS ──────────── */
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-bright);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+        }
+
+        /* ──────────── ABOUT ──────────── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            font-weight: 300;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-dim);
+        }
+
+        .stat-number {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-bright);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* ──────────── SKILLS ──────────── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent)), transparent);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .skill-card:hover {
+            border-color: var(--border-glow);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .skill-card:hover::before { opacity: 1; }
+
+        .skill-icon {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            background: var(--tag-bg, var(--accent-dim));
+            color: var(--tag-color, var(--accent-bright));
+            letter-spacing: 0.02em;
+        }
+
+        /* Card accent colors */
+        .skill-card.backend { --card-accent: var(--accent-bright); --tag-bg: var(--accent-dim); --tag-color: var(--accent-bright); }
+        .skill-card.frontend { --card-accent: var(--cyan); --tag-bg: #00d4ff18; --tag-color: var(--cyan); }
+        .skill-card.database { --card-accent: var(--green); --tag-bg: var(--green-dim); --tag-color: var(--green); }
+        .skill-card.devops { --card-accent: var(--magenta); --tag-bg: #ff3d8e18; --tag-color: var(--magenta); }
+        .skill-card.admin { --card-accent: var(--yellow); --tag-bg: #ffd23d18; --tag-color: var(--yellow); }
+
+        /* ──────────── PROJECTS ──────────── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.35s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-dim);
+        }
+
+        .project-status {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-status .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: blink 2s ease infinite;
+        }
+
+        .project-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 1.2rem;
+        }
+
+        /* ──────────── CONTACT ──────────── */
+        .contact-section {
+            text-align: center;
+            padding-bottom: 6rem;
+        }
+
+        .contact-section .section-title {
+            margin-bottom: 1rem;
+        }
+
+        .contact-sub {
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-dim);
+            transform: translateY(-2px);
+        }
+
+        .social-icon {
+            font-size: 1.1rem;
+        }
+
+        /* ──────────── FOOTER ──────────── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ──────────── ANIMATIONS ──────────── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleY(1); }
+            50% { opacity: 0.8; transform: translateX(-50%) scaleY(1.2); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ──────────── RESPONSIVE ──────────── */
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            section { padding: 3.5rem 0; }
+            .container { padding: 0 1.25rem; }
+        }
+
+        /* ──────────── LANG SYSTEM ──────────── */
+        [data-lang-de] { display: none; }
+        [data-lang-en] { display: initial; }
+        body.lang-de [data-lang-de] { display: initial; }
+        body.lang-de [data-lang-en] { display: none; }
+
+        /* Block-level lang elements */
+        div[data-lang-de], p[data-lang-de], span[data-lang-de],
+        h1[data-lang-de], h2[data-lang-de], h3[data-lang-de],
+        li[data-lang-de], a[data-lang-de] { display: none; }
+        div[data-lang-en], p[data-lang-en], span[data-lang-en],
+        h1[data-lang-en], h2[data-lang-en], h3[data-lang-en],
+        li[data-lang-en], a[data-lang-en] { display: initial; }
+        body.lang-de div[data-lang-de], body.lang-de p[data-lang-de], body.lang-de span[data-lang-de],
+        body.lang-de h1[data-lang-de], body.lang-de h2[data-lang-de], body.lang-de h3[data-lang-de],
+        body.lang-de li[data-lang-de], body.lang-de a[data-lang-de] { display: initial; }
+        body.lang-de div[data-lang-en], body.lang-de p[data-lang-en], body.lang-de span[data-lang-en],
+        body.lang-de h1[data-lang-en], body.lang-de h2[data-lang-en], body.lang-de h3[data-lang-en],
+        body.lang-de li[data-lang-en], body.lang-de a[data-lang-en] { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-label">
+                <span data-lang-en>~/jay-dee $</span>
+                <span data-lang-de>~/jay-dee $</span>
+                <span class="cursor"></span>
+            </div>
+            <h1>
+                Jay Dee<br>
+                <span class="gradient">
+                    <span data-lang-en>Full-Stack Developer</span>
+                    <span data-lang-de>Full-Stack Entwickler</span>
+                </span>
+            </h1>
+            <p class="hero-sub">
+                <span data-lang-en>Software Engineer, Systems Administrator & Database Specialist — building robust, scalable solutions from front to back.</span>
+                <span data-lang-de>Software Engineer, Systemadministrator & Datenbank-Spezialist — robuste, skalierbare Lösungen von Frontend bis Backend.</span>
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">
+                    <span data-lang-en>Get in touch</span>
+                    <span data-lang-de>Kontakt aufnehmen</span>
+                    →
+                </a>
+                <a href="#skills" class="btn">
+                    <span data-lang-en>View skills</span>
+                    <span data-lang-de>Skills ansehen</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about">
+    <div class="container reveal">
+        <div class="section-label">
+            <span data-lang-en>// about</span>
+            <span data-lang-de>// über mich</span>
+        </div>
+        <h2 class="section-title">
+            <span data-lang-en>Who I am</span>
+            <span data-lang-de>Wer ich bin</span>
+        </h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p data-lang-en>
+                    I'm a Full-Stack Developer based in Germany with deep expertise across the entire stack — from crafting polished frontends to designing resilient backend architectures and optimizing complex database systems.
+                </p>
+                <p data-lang-de>
+                    Ich bin ein Full-Stack Entwickler aus Deutschland mit tiefgreifender Expertise über den gesamten Stack — von der Gestaltung polierter Frontends über die Konzeption widerstandsfähiger Backend-Architekturen bis hin zur Optimierung komplexer Datenbanksysteme.
+                </p>
+                <p data-lang-en>
+                    With a strong background in system administration and infrastructure, I bridge the gap between development and operations. I don't just write code — I build systems that scale, stay secure, and keep running.
+                </p>
+                <p data-lang-de>
+                    Mit einem starken Hintergrund in Systemadministration und Infrastruktur schließe ich die Lücke zwischen Entwicklung und Betrieb. Ich schreibe nicht nur Code — ich baue Systeme, die skalieren, sicher bleiben und zuverlässig laufen.
+                </p>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">
+                        <span data-lang-en>Years Experience</span>
+                        <span data-lang-de>Jahre Erfahrung</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">
+                        <span data-lang-en>Curiosity</span>
+                        <span data-lang-de>Neugier</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">
+                        <span data-lang-en>Uptime Mindset</span>
+                        <span data-lang-de>Uptime-Mentalität</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">DE</div>
+                    <div class="stat-label">
+                        <span data-lang-en>Based in Germany</span>
+                        <span data-lang-de>Standort Deutschland</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ SKILLS ═══════════ -->
+<section id="skills">
+    <div class="container reveal">
+        <div class="section-label">// skills</div>
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="skills-grid">
+
+            <div class="skill-card backend">
+                <div class="skill-icon">⚙️</div>
+                <h3>Backend Development</h3>
+                <p data-lang-en>Building scalable APIs, microservices and complex business logic with a focus on clean architecture.</p>
+                <p data-lang-de>Skalierbare APIs, Microservices und komplexe Business-Logik mit Fokus auf Clean Architecture.</p>
+                <div class="tech-tags">
+                    <span class="tag">PHP</span>
+                    <span class="tag">Laravel</span>
+                    <span class="tag">Node.js</span>
+                    <span class="tag">REST</span>
+                    <span class="tag">GraphQL</span>
+                    <span class="tag">Python</span>
+                </div>
+            </div>
+
+            <div class="skill-card frontend">
+                <div class="skill-icon">🖥️</div>
+                <h3>Frontend Development</h3>
+                <p data-lang-en>Responsive, accessible interfaces with modern frameworks and a keen eye for detail.</p>
+                <p data-lang-de>Responsive, barrierefreie Oberflächen mit modernen Frameworks und Auge fürs Detail.</p>
+                <div class="tech-tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Vue.js</span>
+                    <span class="tag">React</span>
+                    <span class="tag">Tailwind</span>
+                    <span class="tag">HTML/CSS</span>
+                </div>
+            </div>
+
+            <div class="skill-card database">
+                <div class="skill-icon">🗄️</div>
+                <h3>
+                    <span data-lang-en>Database Architecture</span>
+                    <span data-lang-de>Datenbank-Architektur</span>
+                </h3>
+                <p data-lang-en>Design, optimization and administration of relational and NoSQL databases for high-performance applications.</p>
+                <p data-lang-de>Design, Optimierung und Administration von relationalen und NoSQL-Datenbanken für High-Performance-Anwendungen.</p>
+                <div class="tech-tags">
+                    <span class="tag">MySQL</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">MariaDB</span>
+                    <span class="tag">SQL Tuning</span>
+                </div>
+            </div>
+
+            <div class="skill-card devops">
+                <div class="skill-icon">🚀</div>
+                <h3>DevOps & CI/CD</h3>
+                <p data-lang-en>Automated pipelines, containerization and infrastructure-as-code for streamlined deployments.</p>
+                <p data-lang-de>Automatisierte Pipelines, Containerisierung und Infrastructure-as-Code für effiziente Deployments.</p>
+                <div class="tech-tags">
+                    <span class="tag">Docker</span>
+                    <span class="tag">Git</span>
+                    <span class="tag">CI/CD</span>
+                    <span class="tag">GitHub Actions</span>
+                    <span class="tag">Nginx</span>
+                    <span class="tag">Apache</span>
+                </div>
+            </div>
+
+            <div class="skill-card admin">
+                <div class="skill-icon">🛡️</div>
+                <h3>
+                    <span data-lang-en>System Administration</span>
+                    <span data-lang-de>Systemadministration</span>
+                </h3>
+                <p data-lang-en>Server management, security hardening, monitoring and network infrastructure across Linux and Windows.</p>
+                <p data-lang-de>Server-Management, Security Hardening, Monitoring und Netzwerk-Infrastruktur unter Linux und Windows.</p>
+                <div class="tech-tags">
+                    <span class="tag">Linux</span>
+                    <span class="tag">Windows Server</span>
+                    <span class="tag">Bash</span>
+                    <span class="tag">Networking</span>
+                    <span class="tag">Security</span>
+                    <span class="tag">Monitoring</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ PROJECTS ═══════════ -->
+<section id="projects">
+    <div class="container reveal">
+        <div class="section-label">
+            <span data-lang-en>// projects</span>
+            <span data-lang-de>// projekte</span>
+        </div>
+        <h2 class="section-title">
+            <span data-lang-en>Selected Work</span>
+            <span data-lang-de>Ausgewählte Projekte</span>
+        </h2>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="project-status">
+                    <span class="dot"></span>
+                    <span data-lang-en>Coming soon</span>
+                    <span data-lang-de>Demnächst</span>
+                </div>
+                <h3>
+                    <span data-lang-en>Project Showcase</span>
+                    <span data-lang-de>Projekt-Showcase</span>
+                </h3>
+                <p data-lang-en>Featured projects and case studies will be added here. Stay tuned for detailed breakdowns of architecture decisions and technical challenges.</p>
+                <p data-lang-de>Ausgewählte Projekte und Case Studies werden hier ergänzt. Bald mit detaillierten Einblicken in Architektur-Entscheidungen und technische Herausforderungen.</p>
+                <div class="tech-tags">
+                    <span class="tag" style="--tag-bg: var(--green-dim); --tag-color: var(--green);">
+                        <span data-lang-en>In Progress</span>
+                        <span data-lang-de>In Arbeit</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Add more project cards here as needed -->
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact" class="contact-section">
+    <div class="container reveal">
+        <div class="section-label">// contact</div>
+        <h2 class="section-title">
+            <span data-lang-en>Let's connect</span>
+            <span data-lang-de>Lass uns vernetzen</span>
+        </h2>
+        <p class="contact-sub">
+            <span data-lang-en>Open for interesting projects, collaborations or just a good tech conversation.</span>
+            <span data-lang-de>Offen für interessante Projekte, Zusammenarbeit oder einfach ein gutes Tech-Gespräch.</span>
+        </p>
+        <div class="social-links">
+            <a href="https://about.me/jaydee" class="social-link" target="_blank" rel="noopener">
+                <span class="social-icon">🌐</span> about.me
+            </a>
+            <a href="https://github.com/jaydee" class="social-link" target="_blank" rel="noopener">
+                <span class="social-icon">💻</span> GitHub
+            </a>
+            <a href="https://linkedin.com/in/jaydee" class="social-link" target="_blank" rel="noopener">
+                <span class="social-icon">💼</span> LinkedIn
+            </a>
+            <!-- Add or update social links as needed -->
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+    <div class="container">
+        <p>© <span id="year"></span> Jay Dee · 
+            <span data-lang-en>Built with precision</span>
+            <span data-lang-de>Mit Präzision gebaut</span>
+        </p>
+    </div>
+</footer>
+
+<script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Language toggle
+    function setLang(lang) {
+        document.body.classList.toggle('lang-de', lang === 'de');
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        localStorage?.setItem?.('lang', lang);
+    }
+
+    // Detect browser language
+    (function() {
+        try {
+            const saved = localStorage?.getItem?.('lang');
+            if (saved) { setLang(saved); return; }
+        } catch(e) {}
+        if (navigator.language?.startsWith('de')) setLang('de');
+    })();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
