@@ -1,0 +1,40 @@
+name: Sync portfolio projects
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-portfolio-projects
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portfolio
+        uses: actions/checkout@v4
+
+      - name: Sync project cards from GitHub repositories
+        env:
+          GITHUB_OWNER: jurri
+          PROJECT_SYNC_TOKENS: ${{ secrets.PROJECT_SYNC_TOKENS }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: ruby scripts/sync-projects.rb
+
+      - name: Commit generated portfolio update
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No portfolio changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "TASK: sync portfolio projects"
+          git push

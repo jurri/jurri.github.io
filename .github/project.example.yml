@@ -1,0 +1,13 @@
+title_en: Example Project
+title_de: Beispielprojekt
+description_en: Short English portfolio description.
+description_de: Kurze deutsche Portfolio-Beschreibung.
+status_en: In Progress
+status_de: In Arbeit
+tags:
+  - PHP
+  - Laravel
+  - GitHub Actions
+order: 10
+active: true
+portfolio: true
