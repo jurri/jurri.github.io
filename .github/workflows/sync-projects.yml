@@ -22,7 +22,7 @@ jobs:
       - name: Sync project cards from GitHub repositories
         env:
           GITHUB_OWNER: jurri
-          PROJECT_SYNC_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
+          PROJECT_SYNC_TOKENS: ${{ secrets.PROJECT_SYNC_TOKENS }}
           GITHUB_TOKEN: ${{ github.token }}
         run: ruby scripts/sync-projects.rb
 

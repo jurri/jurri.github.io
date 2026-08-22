@@ -85,6 +85,15 @@ def present_env(name)
     value.empty? ? nil : value
 end
 
+def token_list
+    raw_tokens = [present_env("PROJECT_SYNC_TOKENS")].compact
+
+    raw_tokens.flat_map { |value| value.split(/[\n,]+/) }
+              .map(&:strip)
+              .reject(&:empty?)
+              .uniq
+end
+
 def pick(project, *keys)
     keys.each do |key|
         value = project[key.to_s] || project[key.to_sym]
@@ -200,13 +209,26 @@ def replace_project_block(html, generated)
 end
 
 owner = ENV.fetch("GITHUB_OWNER", "jurri")
-project_sync_token = present_env("PROJECT_SYNC_TOKEN") || present_env("GH_TOKEN")
-token = project_sync_token || present_env("GITHUB_TOKEN")
-client = GitHubClient.new(token: token, authenticated_repo_listing: !project_sync_token.nil?)
+project_sync_tokens = token_list
+fallback_token = present_env("GITHUB_TOKEN")
+clients = if project_sync_tokens.empty?
+    [GitHubClient.new(token: fallback_token, authenticated_repo_listing: false)]
+else
+    project_sync_tokens.map do |project_sync_token|
+        GitHubClient.new(token: project_sync_token, authenticated_repo_listing: true)
+    end
+end
 
-projects = client.repos(owner: owner)
-                 .reject { |repo| repo["archived"] }
-                 .filter_map do |repo|
+repos_by_name = {}
+clients.each do |client|
+    client.repos(owner: owner).each do |repo|
+        repos_by_name[repo.fetch("full_name")] ||= [repo, client]
+    end
+end
+
+projects = repos_by_name.values.filter_map do |repo, client|
+    next if repo["archived"]
+
     raw = client.project_file(repo.fetch("full_name"))
     raw ? project_from(repo, raw) : nil
 rescue StandardError => error
